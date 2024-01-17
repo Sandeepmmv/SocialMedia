@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'Myapp/css/signin.css' %}">
+    <link rel=".." href="..">
+    <title>Sign In</title>
+</head>
+<body style="background-image: url('{% static "Myapp/images/signbg.jpg" %}');" >
+    <form class=" form-signin border border-3 bg-gradient  " method="post" action="" >
+        {% csrf_token %}
+        
+        <img class="mb-4 rounded rounded-circle border border-3 " src="{% static 'Myapp/images/dgetlogo.jpg' %}" alt="" width="80" height=" 80">
+        <h1 class="h3 mb-3 font-weight-normal text-center ">Sign Up</h1>
+        <div class="">
+            <style>
+                h5{
+                    color: red;
+                }
+            </style>
+            {% for message in messages %}
+            <h5>{{message}}</h5>
+            {%  endfor  %}
+        </div>
+        <div class="text-uppercase text-primary bg-gradient  ">
+        <label for="username" class="sr-only ">Username</label><a data-bs-toggle="popover" title="" data-bs-trigger="hover focus"  data-bs-content="Username must be unique. Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. "><i class="bi bi-info-circle text-light ps-2"></i></a>
+        <input type="text" id="username" name="username" class="form-control" placeholder="username" required autofocus>
+        
+        <label for="first_name" class="sr-only ">First Name</label><a data-bs-toggle="popover" title="" data-bs-trigger="hover focus"  data-bs-content="Write Your First name here.."><i class="bi bi-info-circle text-light ps-2"></i></a>
+        <input type="text" id="first_name" name="first_name" class="form-control" placeholder="First Name" required>
+
+        <label for="last_name" class="sr-only ">Last Name</label><a data-bs-toggle="popover" title="" data-bs-trigger="hover focus"  data-bs-content="Write Your Last name here.."><i class="bi bi-info-circle text-light ps-2"></i></a>
+        <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last Name" required>
+
+        <!-- <label for="dob" class="sr-only ">Date Of Birth</label>
+        <input type="date" id="dob" name="dob" class="form-control" placeholder="Date Of Birth" required> -->
+
+        <label for="email" class="sr-only ">Email</label><a data-bs-toggle="popover" title="" data-bs-trigger="hover focus"  data-bs-content="Write Your Email here in format like socialmedia123@gmail.com "><i class="bi bi-info-circle text-light ps-2"></i></a>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+
+        <label for="password1" class="sr-only ">Password</label><a data-bs-toggle="popover" title="" data-bs-trigger="hover focus"  data-bs-content="Your password can’t be too similar to your other personal information.
+        Your password must contain at least 8 characters.
+        Your password can’t be a commonly used password.
+        Your password can’t be entirely numeric"><i class="bi bi-info-circle text-light ps-2"></i></a>
+        <input type="password" id="password1" name="password1" class="form-control" placeholder="Password" required>
+
+        <label for="password2" class="sr-only ">Confirm Password</label><a data-bs-toggle="popover" title="" data-bs-trigger="hover focus"  data-bs-content="Enter the same password as before, for verification."><i class="bi bi-info-circle text-light ps-2"></i></a>
+        <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm Password" required>
+
+        <button class="btn btn-lg btn-primary btn-block text-center " type="submit">Sign in</button>
+
+        <a href="{% url 'signin' %}">Already Sign Up? login Here </a>
+        <p class="mt-5 mb-3 text-muted text-center ">&copy; Sandeep Vishwakarma FyBscit</p>
+        </div>
+    </form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();   
+    });
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
+</body>
+</html>

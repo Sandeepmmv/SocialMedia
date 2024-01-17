@@ -1,0 +1,227 @@
+{% load static %}
+{% block body %}
+{% include 'Myapp/base.html' %}
+<div class="container-fluid mt-3 " style="background-color: rgba(248 249 250 1);
+background-color: r;">
+    <!-- messages -->
+    <div >
+        <style>
+            h5{
+                color: red;
+            }
+        </style>
+        {% for message in messages %}
+        <h5>{{message}}</h5>
+        {%  endfor  %}
+    </div>
+    <div class="row my-2 mx-5">
+        <!-- left-page -->
+        <div class="center_page col-lg-7 col-sm-12 ">
+            
+            <!-- <div class="status ">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active " data-bs-interval="10000">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-wrapper">
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="{% static 'Myapp\images\avater1.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item " data-bs-interval="2000">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-wrapper">
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="{% static 'Myapp\images\avater2.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item ">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-wrapper">
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="{% static 'Myapp\images\avater3.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div> -->
+            {% for post in post reversed %}
+            <div class="card mb-3 " > <!-- style="width: 18rem;"-->
+                <div class="card-body">
+                    <a href="/profile/{{post.user}}" class="text-decoration-none" ><h5 class="card-title">@{{post.user}}</h5></a>
+                    <!-- <p class="card-text text-primary">{{user.first_name}} {{user.last_name}}</p> -->
+                    <p class="card-text">{{post.caption}}</p>
+                    <img src="{{post.image.url}}" class="card-img-top img-thumbnail border " alt="image Could not load">
+                    <div id="feedback_post" class="feedback_post pt-2">
+                        <a class="text-decoration-none " href="/post_like?post_id={{post.uid}} "><i class="bi bi-heart pe-2">{{post.nos_likes}}like</i></a>
+                        <a class="text-decoration-none" href="#"><i class="bi bi-chat text-center pe-2 ">Comments</i></a>
+                        <a class="text-decoration-none" href="#"><i class="bi bi-send pe-2">Share</i></a>
+                        <a class="text-decoration-none " href="{{post.image.url}}" download><i class="bi bi-download">Download</i></a>
+                        {% if post.nos_likes == 0 %}
+                        <p>No likes</p>
+                        {% elif post.nos_likes == 1 %}
+                        <p>Liked by {{post.nos_likes}} person</p>
+                        {% else %}
+                        <p>Liked by {{post.nos_likes}} people</p>
+                        {% endif %}
+                    </div>
+                </div>
+              </div>
+            {% endfor %}
+            {% for post_model in user_posts_model reversed %}
+            <div class="card mb-3 " > <!-- style="width: 18rem;"-->
+                <div class="card-body">
+                    <a href="/profile/{{post.user}}" class="text-decoration-none" ><h5 class="card-title">@{{post_model.user}}</h5></a>
+                    <!-- <p class="card-text text-primary">{{user.first_name}} {{user.last_name}}</p> -->
+                    <p class="card-text">{{post_model.text}}</p>
+                    <video id="myvideo"  width="100%" controls >
+                        <source src="{{post_model.video.url}}">
+                    </video>
+                    <!-- <img src="{{post_model}}" class="card-img-top img-thumbnail border " alt="image Could not load"> -->
+                    <div id="feedback_post" class="feedback_post pt-2">
+                        <a class="text-decoration-none " href="/post_like?post_id={{post_model.uid}} "><i class="bi bi-heart pe-2">{{post.nos_likes}}like</i></a>
+                        <a class="text-decoration-none" href="#"><i class="bi bi-chat text-center pe-2 ">Comments</i></a>
+                        <a class="text-decoration-none" href="#"><i class="bi bi-send pe-2">Share</i></a>
+                        <a class="text-decoration-none " href="{{post_model.video.url}}" download><i class="bi bi-download">Download</i></a>
+                        {% if post.nos_likes == 0 %}
+                        <p>No likes</p>
+                        {% elif post.nos_likes == 1 %}
+                        <p>Liked by {{post.nos_likes}} person</p>
+                        {% else %}
+                        <p>Liked by {{post.nos_likes}} people</p>
+                        {% endif %}
+                    </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+        <!-- right-page -->
+        <div class="col-lg-5 col-md-5   ">
+            <!-- Post sec  -->
+            <form action="upload/" class="pb-2" method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <div class="post shadow border">
+                <div class="post_input">
+                    <a href="/profile/{{user.username}}"><img src="{{user_profile.profileimage.url}} "></a>
+                    <textarea rows="2" name="caption" placeholder="write a post here... "></textarea>
+                    <input class="btn btn-success btn-sm " type="submit" name="post-submit" id="post-submit"
+                        value="POST">
+                </div>
+                <nav class="navbar navbar-light bg-light">
+                    <div class="container-fluid ">
+                        <a class="navbar-brand row d-flex  " href="#">
+                            <!-- <i class="btn btn-sm border m-0 p-2 bi bi-image-fill ">  Photo </i>
+                            <i class="btn btn-sm border m-0 p-2 bi bi-camera-reels-fill">  Video</i>
+                            <i class="btn btn-sm border m-0 p-2 bi bi-calendar-event-fill">  Event</i>
+                            <i class="btn btn-sm border m-0 p-2 bi bi-emoji-smile-fill">  Feeling /Activity</i> -->
+                            <div class="col-3 px-2 ">
+                                <label for="post_photo"><i class="btn btn-sm border  bi bi-image-fill ">  Photo </i></label>
+                                <input type="file" name="post_photo" id="post_photo" hidden >
+                            </div>
+                            <div class="col-3 px-2 ">
+                                <label for="post_video"> <i class="btn btn-sm border  bi bi-camera-reels-fill">  Video</i></label>
+                                <input type="file" name="post_video" id="post_video" hidden >
+                            </div>
+                            <div class="col-3 px-2 ">
+                                <label for="post_audio"><i class="btn btn-sm border  bi bi-calendar-event-fill">  audio</i></label>
+                                <input type="datetime-local" name="post_audio" id="post_audio" hidden  >
+                            </div>
+                            <div class="col-3 px-2 ">
+                                <label for="post_file"><i class="btn btn-sm border  bi bi-emoji-smile-fill"  >  File/Activity</i></label>
+                                <input type="file" name="post_file" id="post_file" hidden >
+                            </div>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            </form>
+            <div class="cover-image border shadow bg-white p-2">
+                <img src="{% static 'Myapp\images\cover-profile.jpg' %}" class="img-fluid img-thumbnail w-100 ">
+                <div class="profile-image">
+                    <a href="/profile/{{user.username}}"><img class="img-thumbnail rounded-circle img-fluid w-25"  src="{{user_profile.profileimage.url}}"></a>
+                    <h2 class="text-primary ">{{user.first_name}} {{user.last_name}}</h2>
+                    <h4 class="text-success">{{user_profile.bio}}</h4>
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Jobs list</div>
+                                company.com and more
+                            </div>
+                            <span class="badge bg-primary rounded-pill">14</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Post</div>
+                                Likes and Comments
+                            </div>
+                            <span class="badge bg-primary rounded-pill">14</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">View</div>
+                                Number of person views
+                            </div>
+                            <span class="badge bg-primary rounded-pill">14</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="">
+                {% for user_suggestion in suggestions_username_profile_list %}
+                    <div class="container-fluid shadow border d-flex mt-2">
+                    <a href="/profile/{{user_suggestion.user}}"><img src="{{user_suggestion.profileimage.url}}" class="img-thumbnail " height="100px" width="100px" alt="No image Found"></a>
+                    <div class="conitainer-fluid "> 
+                    <a href="/profile/{{user_suggestion.user}}" class="text-decoration-none" ><h4 class="lead text-success" >@{{user_suggestion.user}}</h4></a>
+                    <div class="text">
+                        <!-- <label >Likes: {{user_post.nos_likes}}</label> -->
+                        <input type="hidden" value="{{user.username}}" name="follower" >
+                        <input type="hidden" value="{{user_obj.username}}"  name="user" >
+                        <button type="submit" class="btn btn-danger" >{{button_text}}</button>
+                        
+                      </div>   
+                    </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock body %}
